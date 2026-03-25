@@ -34,7 +34,10 @@
         <poi>3.16</poi>
     </properties>
     <dependencyManagement>
+
+
         <dependencies>
+
             <dependency>
                 <groupId>com.github.pagehelper</groupId>
                 <artifactId>pagehelper-spring-boot-starter</artifactId>

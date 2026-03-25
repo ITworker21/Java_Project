@@ -101,4 +101,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         return new PageResult(total,records);
     }
+
+
+    public void startOrStop(Integer status, long id) {
+        Employee employee = Employee.builder()
+                            .status(status)
+                            .id(id)
+                            .build();//新风格创建和设置对象
+        employeeMapper.update(employee);
+    }
 }

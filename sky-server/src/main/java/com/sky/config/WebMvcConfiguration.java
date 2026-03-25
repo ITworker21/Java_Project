@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.cbor.MappingJackson2CborHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
@@ -76,7 +77,8 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
      */
     protected void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
         log.info("消息转换");
-        MappingJackson2CborHttpMessageConverter converter = new MappingJackson2CborHttpMessageConverter();
+         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
         converter.setObjectMapper(new JacksonObjectMapper());
+        converters.add(0,converter);
     }
 }
