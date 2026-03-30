@@ -67,6 +67,7 @@
                 <version>${commons.lang}</version>
             </dependency>
 
+
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
@@ -107,6 +108,7 @@
                 <groupId>com.aliyun.oss</groupId>
                 <artifactId>aliyun-sdk-oss</artifactId>
                 <version>${aliyun.sdk.oss}</version>
+
             </dependency>
 
             <dependency>
