@@ -12,6 +12,7 @@
         </where>
         order by create_time desc
     </select>
+
 <!--    此处虽然爆红但是仍可以使用因为在配置文件中已经扫到了实体类包-->
     <update id="update" parameterType="Employee">
         update employee

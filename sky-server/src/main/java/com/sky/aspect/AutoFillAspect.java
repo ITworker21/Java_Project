@@ -41,7 +41,7 @@ public class AutoFillAspect {
             return;
         Object enity = args[0];
 
-        LocalDate now = LocalDate.now();
+        LocalDateTime now = LocalDateTime.now();
         Long currentId = BaseContext.getCurrentId();
 
         if(operationType == OperationType.INSERT)
@@ -50,12 +50,26 @@ public class AutoFillAspect {
                 Method setCreateTime = enity.getClass().getDeclaredMethod(AutoFillConstant.SET_CREATE_TIME, LocalDateTime.class);
                 Method setCreateUser = enity.getClass().getDeclaredMethod(AutoFillConstant.SET_CREATE_USER,Long.class);
                 Method setUpdateTime = enity.getClass().getDeclaredMethod(AutoFillConstant.SET_UPDATE_TIME, LocalDateTime.class);
-                Method setUpdateUser = enity.getClass().getDeclaredMethod(AutoFillConstant.SET_UPDATE_USER,long.class);
+                Method setUpdateUser = enity.getClass().getDeclaredMethod(AutoFillConstant.SET_UPDATE_USER,Long.class);
 
                 setCreateTime.invoke(enity,now);
                 setCreateUser.invoke(enity,currentId);
                 setUpdateTime.invoke(enity,now);
                 setUpdateUser.invoke(enity,currentId);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+        else if(operationType == OperationType.UPDATE)
+        {
+            try {
+                Method setCreateTime = enity.getClass().getDeclaredMethod(AutoFillConstant.SET_CREATE_TIME, LocalDateTime.class);
+                Method setCreateUser = enity.getClass().getDeclaredMethod(AutoFillConstant.SET_CREATE_USER,Long.class);
+
+
+                setCreateTime.invoke(enity,now);
+                setCreateUser.invoke(enity,currentId);
+
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
