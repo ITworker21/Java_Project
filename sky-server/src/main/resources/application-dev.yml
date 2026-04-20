@@ -13,3 +13,9 @@ sky:
     access-key-secret: ${sky.alioss.endpoint}
     bucket-name: ${sky.alioss.endpoint}
     #oss-cn-beijing.aliyuncs.com
+
+  redis:
+    host: 192.168.163.134
+    port: 6379
+    password: 123321
+    database: 10
