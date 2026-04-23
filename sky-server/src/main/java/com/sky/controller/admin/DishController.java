@@ -91,4 +91,14 @@ public class DishController {
         return Result.success();
     }
 
+    @ApiOperation("菜品启用和禁用")
+    @PostMapping("/status/{status}")
+    public Result<Integer> setDishStatus(@PathVariable Integer status,long id)
+    {
+
+        log.info("{}菜品的{}",id, status == 1?"启用":"禁用");
+
+        dishService.setDishStatus(status,id);
+        return Result.success();
+    }
 }

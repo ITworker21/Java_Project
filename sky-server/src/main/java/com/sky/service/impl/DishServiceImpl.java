@@ -107,4 +107,13 @@ public class DishServiceImpl implements DishService {
         dishFlavorMapper.deleteByDishId(dishDTO.getId());
 
     }
+
+    @Override
+    public void setDishStatus(Integer status, long id) {
+        Dish dish = Dish.builder()
+                    .status(status)
+                    .id(id)
+                    .build();
+        dishMapper.update(dish);
+    }
 }

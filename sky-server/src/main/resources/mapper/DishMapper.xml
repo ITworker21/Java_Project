@@ -4,7 +4,7 @@
 <mapper namespace="com.sky.mapper.DishMapper">
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        insert into dish(name, category_id, price, image, description, create_time, update_time, create_user, update_user,status)
+        insert into dish (name, category_id, price, image, description, create_time, update_time, create_user, update_user,status)
             value
         (#{name}, #{categoryId}, #{price}, #{image}, #{description}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser},#{status})
     </insert>
@@ -34,7 +34,7 @@
             <if test="description != null">   description = #{description]</if>
             <if test="status != null">        status = #{status]</if>
             <if test="updateTime != null">    update_time = #{updateTime]</if>
-            <if test="name != null">          updat_user = #{updateUser]</if>
+            <if test="name != null">          update_user = #{updateUser]</if>
         </set>
     </update>
 </mapper>
