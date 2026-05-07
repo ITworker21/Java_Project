@@ -22,6 +22,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.beans.Transient;
 import java.util.List;
@@ -109,7 +110,7 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public void setDishStatus(Integer status, long id) {
+    public void setDishStatus( Integer status, long id) {
         Dish dish = Dish.builder()
                     .status(status)
                     .id(id)
