@@ -13,7 +13,7 @@
     <insert id="insertBatch">
         insert into setmeal_dish (setmeal_id, name,dish_id,price,copies) value
         <foreach collection="setmealDishList" item="df" separator=",">
-            (#{df.setmealId},#{df.name},#{df.dish_id},#{df.price},#{df.copies})
+            (#{df.setmealId},#{df.name},#{df.dishId},#{df.price},#{df.copies})
         </foreach>
     </insert>
 

@@ -109,12 +109,23 @@ public class DishServiceImpl implements DishService {
 
     }
 
-    @Override
+
     public void setDishStatus( Integer status, long id) {
         Dish dish = Dish.builder()
                     .status(status)
                     .id(id)
                     .build();
         dishMapper.update(dish);
+    }
+
+
+    public List<DishVO> list(Long categoryId) {
+
+        Dish dish = Dish.builder()
+                .categoryId(categoryId)
+                .status(StatusConstant.ENABLE)
+                .build();
+        List<DishVO> dishVOList = dishMapper.list(dish);
+        return dishVOList;
     }
 }

@@ -35,9 +35,21 @@ public interface SetmealMapper {
     List<DishItemVO> getDishItemBySetmealId(Long setmealId);
 
 
-    @Insert("insert into setmeal(category_id, name, price, description, image) "
-    +"values "
-    +"(#{categoryId},#{name},#{price},#{status},#{description},#{image})")
-    @AutoFill(value = OperationType.INSERT)
+
     void insert(Setmeal setmeal);
+
+    Page<SetmealVO> pageQuery(SetmealPageQueryDTO setmealPageQueryDTO);
+
+
+
+    @Select("select count(id) from setmeal_dish where #{id} = id")
+    Integer countByCategoryId(Long id);
+
+    @Select("select * from setmeal where id = #{id}")
+    Setmeal getById(Long id);
+
+    @Delete("delete from setmeal where id = #{id}")
+    void deleteById(Long setmealId);
+
+    void update(Setmeal setmeal);
 }
