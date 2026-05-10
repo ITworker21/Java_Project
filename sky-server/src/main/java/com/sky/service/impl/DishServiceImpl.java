@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.beans.Transient;
+import java.util.ArrayList;
 import java.util.List;
 
 //打错成service
@@ -96,7 +97,7 @@ public class DishServiceImpl implements DishService {
 
     public DishVO getByIdWithFlavors(Long id) {
         Dish dish = dishMapper.getById(id);
-        DishFlavor dishFlavor = dishFlavorMapper.getByDishId(id);
+        List<DishFlavor> dishFlavor = dishFlavorMapper.getByDishId(id);
         DishVO dishVO = new DishVO();
         BeanUtils.copyProperties(dish,dishVO);
         BeanUtils.copyProperties(dishFlavor,dishVO);
@@ -119,13 +120,37 @@ public class DishServiceImpl implements DishService {
     }
 
 
-    public List<DishVO> list(Long categoryId) {
+    public List<Dish> list(Long categoryId) {
 
         Dish dish = Dish.builder()
                 .categoryId(categoryId)
                 .status(StatusConstant.ENABLE)
                 .build();
-        List<DishVO> dishVOList = dishMapper.list(dish);
+        List<Dish> dishList = dishMapper.list(dish);
+        return dishList;
+    }
+    /**
+     * 条件查询菜品和口味
+     * @param dish
+     * @return
+     */
+    public List<DishVO> listWithFlavor(Dish dish) {
+        List<Dish> dishList = dishMapper.list(dish);
+
+        List<DishVO> dishVOList = new ArrayList<>();
+
+        for (Dish d : dishList) {
+            DishVO dishVO = new DishVO();
+            BeanUtils.copyProperties(d,dishVO);
+
+            //根据菜品id查询对应的口味
+            List<DishFlavor> flavors = dishFlavorMapper.getByDishId(d.getId());
+
+            dishVO.setFlavors(flavors);
+            dishVOList.add(dishVO);
+        }
+
         return dishVOList;
     }
 }
+

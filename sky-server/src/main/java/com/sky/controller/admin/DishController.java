@@ -36,6 +36,8 @@ public class DishController {
     @Autowired
     private DishFlavorMapper dishFlavorMapper;
 
+
+
     @PostMapping
     @ApiOperation("新增菜品")
     public Result save(@RequestBody DishDTO dishDTO)
@@ -105,11 +107,11 @@ public class DishController {
 
     @ApiOperation("根据分类id查询菜品")
     @GetMapping("/list")
-    public Result<List<DishVO>> list(Long categoryId)
+    public Result<List<Dish>> list(Long categoryId)
     {
         log.info("根据分类id查询菜品{}",categoryId);
 
-        List<DishVO> dishVOList = dishService.list(categoryId);
+        List<Dish> dishVOList = dishService.list(categoryId);
         return Result.success(dishVOList);
 
     }
