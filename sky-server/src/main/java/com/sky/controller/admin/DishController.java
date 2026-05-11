@@ -17,10 +17,12 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 
 @RestController
@@ -31,11 +33,9 @@ public class DishController {
 
     @Autowired
     DishService dishService;
-    @Autowired
-    private DishMapper dishMapper;
-    @Autowired
-    private DishFlavorMapper dishFlavorMapper;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
 
 
     @PostMapping
@@ -44,6 +44,10 @@ public class DishController {
     {
         log.info("新增菜品:{}",dishDTO);
         dishService.saveWithFlavor(dishDTO);
+
+        //清理缓存
+        String key = "dish_"+dishDTO.getCategoryId();
+        clearCache(key);
         return Result.success();
     }
 
@@ -62,34 +66,26 @@ public class DishController {
     {
         log.info("菜品删除{}",ids);
         dishService.deleteBatch(ids);
+        clearCache("dish_*");
         return Result.success();
     }
 
     @ApiOperation("菜品修改查询")
     @GetMapping("/{id}")
-    public Result<DishVO> getById(@RequestParam Long id)
+    public Result<DishVO> getById(@PathVariable Long id)
     {
         DishVO dishVO = dishService.getByIdWithFlavors(id);
         return Result.success(dishVO);
     }
 
-    public Result update(DishDTO dishDTO)
+    @ApiOperation("菜品修改")
+   @PutMapping
+    public Result update(@RequestBody DishDTO dishDTO)
     {
         log.info("修改菜品:{}",dishDTO);
-        Dish dish =new Dish();
-        BeanUtils.copyProperties(dishDTO,dish);
 
-
-        dishMapper.update(dish);
-
-        dishFlavorMapper.getByDishId(dish.getId());
-
-        List<DishFlavor> dishFlavors = dishDTO.getFlavors();
-
-
-        if (dishFlavors!=null&&dishFlavors.size()>0)
-                dishFlavorMapper.insertBatch(dishFlavors);
-
+        dishService.updateWithFlavor(dishDTO);
+        clearCache("dish_*");
         return Result.success();
     }
 
@@ -101,6 +97,7 @@ public class DishController {
         log.info("{}菜品的{}",id, status == 1?"启用":"禁用");
 
         dishService.setDishStatus(status,id);
+        clearCache("dish_*");
         return Result.success();
     }
 
@@ -114,5 +111,11 @@ public class DishController {
         List<Dish> dishVOList = dishService.list(categoryId);
         return Result.success(dishVOList);
 
+    }
+
+    private void clearCache(String pattern)
+    {
+        Set key = redisTemplate.keys(pattern);
+        redisTemplate.delete(key);
     }
 }

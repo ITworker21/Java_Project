@@ -9,11 +9,13 @@ sky:
 
   alioss:
     endpoint: oss-cn-beijing.aliyuncs.com
-    access-key-id: LTAI5tQ2D6gAJFgMf3sKHMat
-    access-key-secret: gONjrABx3LsdLnRWeTDUx4jn4Yxx7u
+    access-key-id:
+    access-key-secret:
     bucket-name: java20260329
     #oss-cn-beijing.aliyuncs.com
     #java20260329
+    #gONjrABx3LsdLnRWeTDUx4jn4Yxx7u
+    #LTAI5tQ2D6gAJFgMf3sKHMat
 
   redis:
     host: 192.168.163.134

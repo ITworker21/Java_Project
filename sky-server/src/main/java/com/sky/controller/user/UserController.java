@@ -17,13 +17,15 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 
-@Repository
+
+@RestController
 @RequestMapping("/user/user")
 @Api(tags = "c端相关接口")
 @Slf4j

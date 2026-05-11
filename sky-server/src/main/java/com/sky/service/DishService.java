@@ -31,6 +31,8 @@ public interface DishService {
      * @return
      */
     List<DishVO> listWithFlavor(Dish dish);
+
+    void updateWithFlavor(DishDTO dishDTO);
 }
 
 

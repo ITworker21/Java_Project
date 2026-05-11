@@ -36,6 +36,7 @@ public interface SetmealMapper {
 
 
 
+    @AutoFill(OperationType.INSERT)
     void insert(Setmeal setmeal);
 
     Page<SetmealVO> pageQuery(SetmealPageQueryDTO setmealPageQueryDTO);
@@ -51,5 +52,6 @@ public interface SetmealMapper {
     @Delete("delete from setmeal where id = #{id}")
     void deleteById(Long setmealId);
 
+    @AutoFill(OperationType.UPDATE)
     void update(Setmeal setmeal);
 }
