@@ -9,8 +9,8 @@ sky:
 
   alioss:
     endpoint: oss-cn-beijing.aliyuncs.com
-    access-key-id:
-    access-key-secret:
+    access-key-id: LTAI5tQ2D6gAJFgMf3sKHMat
+    access-key-secret: gONjrABx3LsdLnRWeTDUx4jn4Yxx7u
     bucket-name: java20260329
     #oss-cn-beijing.aliyuncs.com
     #java20260329
@@ -26,3 +26,10 @@ sky:
   wechat:
     appid: wx4056c0b67e0dfd1e
     secret: 55ba32b4fafdcc7f500318b1878b8884
+    mchid: 1561414331
+    mchSerialNo: 4B3B3DC35414AD50B1B755BAF8DE9CC7CF407606
+#    privateKeyFilePath: D:\pay\apiclient_key.pem
+    apiV3Key: CZBK51236435wxpay435434323FFDuv3
+#    wechatPayCertFilePath: D:\pay\wechatpay_166D96F876F45C7D07CE98952A96EC980368ACFC.pem
+    notifyUrl: https://6619cf50.r6.cpolar.top/notify/paySuccess
+    refundNotifyUrl: https://6619cf50.r6.cpolar.top/notify/refundSuccess
